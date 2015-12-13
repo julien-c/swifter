@@ -203,6 +203,10 @@ public class Socket: Hashable, Equatable {
     
     private class func htonsPort(port: in_port_t) -> in_port_t {
         #if os(Linux)
+            func htons(value: CUnsignedShort) -> CUnsignedShort {
+                return (value << 8) + (value >> 8)
+            }
+        
             return htons(port)
         #else
             let isLittleEndian = Int(OSHostByteOrder()) == OSLittleEndian
