@@ -6,6 +6,10 @@
 
 #if os(Linux)
     import Glibc
+    
+    func htons(value: CUnsignedShort) -> CUnsignedShort {
+        return (value << 8) + (value >> 8)
+    }
 #else
     import Foundation
 #endif
